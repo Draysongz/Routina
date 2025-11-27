@@ -3,7 +3,7 @@ name: Build & Publish Internal (React Native)
 on:
   push:
     branches:
-      - master
+      - main
   workflow_dispatch:
 
 jobs:
@@ -39,12 +39,9 @@ jobs:
 
       - name: Generate release keystore
         run: |
-          keytool -genkeypair -v \
-            -keystore android/release-keystore.jks \
+          keytool -genkeypair -v -keystore android/release-keystore.jks \
             -alias ${{ secrets.KEY_ALIAS }} \
-            -keyalg RSA \
-            -keysize 2048 \
-            -validity 10000 \
+            -keyalg RSA -keysize 2048 -validity 10000 \
             -storepass ${{ secrets.KEYSTORE_PASSWORD }} \
             -keypass ${{ secrets.KEY_PASSWORD }} \
             -dname "CN=Internal, OU=Dev, O=Company, L=City, S=State, C=US"
@@ -53,12 +50,10 @@ jobs:
         run: echo "${{ secrets.PLAY_STORE_SERVICE_ACCOUNT }}" > android/play-service-account.json
 
       - name: Set signing properties
-    run: |
-    cat > android/gradle.properties <<EOF
-KEYSTORE_PASSWORD=${{ secrets.KEYSTORE_PASSWORD }}
-KEY_ALIAS=${{ secrets.KEY_ALIAS }}
-KEY_PASSWORD=${{ secrets.KEY_PASSWORD }}
-EOF
+        run: |
+          echo "KEYSTORE_PASSWORD=${{ secrets.KEYSTORE_PASSWORD }}" >> android/gradle.properties
+          echo "KEY_ALIAS=${{ secrets.KEY_ALIAS }}" >> android/gradle.properties
+          echo "KEY_PASSWORD=${{ secrets.KEY_PASSWORD }}" >> android/gradle.properties
 
       - name: Build AAB
         working-directory: android
