@@ -53,8 +53,8 @@ jobs:
         run: echo "${{ secrets.PLAY_STORE_SERVICE_ACCOUNT }}" > android/play-service-account.json
 
       - name: Set signing properties
-        run: |
-          cat > android/gradle.properties <<EOF
+    run: |
+    cat > android/gradle.properties <<EOF
 KEYSTORE_PASSWORD=${{ secrets.KEYSTORE_PASSWORD }}
 KEY_ALIAS=${{ secrets.KEY_ALIAS }}
 KEY_PASSWORD=${{ secrets.KEY_PASSWORD }}
