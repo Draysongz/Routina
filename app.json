@@ -1,4 +1,9 @@
 {
   "name": "Aking",
-  "displayName": "Aking"
+  "displayName": "Aking",
+  "extra": {
+    "eas": {
+      "projectId": "6dd8a8c9-316e-4338-8014-e6289fc59101"
+    }
+  }
 }
