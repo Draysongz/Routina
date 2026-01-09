@@ -1,6 +1,9 @@
 {
   "name": "Aking",
   "displayName": "Aking",
+  "android": {
+    "package": "com.aking"
+  },
   "extra": {
     "eas": {
       "projectId": "1a003357-09bb-4728-96d7-aad435b9a80e"
